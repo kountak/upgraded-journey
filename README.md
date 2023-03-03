@@ -6,7 +6,7 @@
 ### Python
 #### Origin
 #### Market Shares
-![Python is third most used langage](./img/Market_Share.png "Most used programming languages among developers worldwide as of 2022")
+![Python is third most used langage](./img/Market_Share.png)
 #### Mostly use cases
 
 ### Errors and Exceptions
