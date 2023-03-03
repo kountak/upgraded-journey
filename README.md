@@ -1,249 +1,147 @@
+![Logo DIT](./img/Logo.png)
+#  EXCEPTIONS 
 
-# EXCEPTIONS
-- Contexte : MI DIT AI & GIB DATA
-- Problematique : Write an article about an advance subject in python
 
-## Concepts principaux
+## Main Concepts
 ### Python
-Origin, Market Shares, Mostly use cases
+#### Origin
+#### Market Shares
+#### Mostly use cases
 
+### Errors and Exceptions
+Error and exception handling is something you should consider in all your programs. It is obvious for a developer to encounter some errors when writing code. However, there are mainly two types of errors, built-in and user-caused.
+Until now error messages haven’t been more than mentioned, but if you have tried out the examples you have probably seen some. There are (at least) two distinguishable kinds of errors: _syntax errors_ and _exceptions_
+
+#### Syntax Errors
+Syntax errors, also known as parsing errors, are perhaps the most common kind of complaint you get while you are still learning Python:
+``` python
+while True print('Hello Word')
+File "<stdin>", line 1
+    while True print('Hello world')
+                   ^
+SyntaxError: invalid syntax
+``` 
+The parser repeats the offending line and displays a little ‘arrow’ pointing at the earliest point in the line where the error was detected. The error is caused by (or at least detected at) the token preceding the arrow: in the example, the error is detected at the function print(), since a colon (':') is missing before it. File name and line number are printed so you know where to look in case the input came from a script.
 ### Exceptions : 
 An exception is an event, **which occurs during the execution of a program, that disrupts the normal flow of the program's instructions**.
+In fact, Python's exception and error handling helps developers to deal with these exceptional situations by controlling the behavior of your code even in case of errors.
+Exceptions occur when exceptional situations arise in your program. For example, opening a file that doesn't exist, or stopping a running program and sometimes even a user will want to have fun by typing anything. Such situations are handled with the help of exceptions.
+Even if a statement or expression is syntactically correct, it may cause an error when an attempt is made to execute it. Errors detected during execution are called exceptions and are not unconditionally fatal: you will soon learn how to handle them in Python programs. Most exceptions are not handled by programs, however, and result in error messages as shown here:
+``` python
+25 * 10/0
+```
 
-, importance of exceptions,
-### 
-Introduction : 
+#### Type of exceptions
+There are many type of exceptions (*[see here](https://docs.python.org/3/library/exceptions.html#bltin-exceptions)*). The most current are 
+- [*ZeroDivisionError*](https://docs.python.org/3/library/exceptions.html#ZeroDivisionError) : when you try to divide a number by zero
+- [*NameError*](https://docs.python.org/3/library/exceptions.html#NameError) : when a local or global name cannot be found
+- [*TypeError*](https://docs.python.org/3/library/exceptions.html#TypeError)
+
+#### Syntax and Handling 
+##### Try....except
+The most basic instruction in exception and error handling Python uses the **try** and **except** keywords to handle exceptions. Both keywords are followed by indented code blocks.
+``` python
+# we tell Python to try to execute a code
+# but, in case of an exception, it will have to execute another code
+try:
+    # try this bloc of code
+except:
+    # to execute on error in the try block
+```
+The try/except statement has another option, which is the use of the **else**. The else statement will only work if no error is generated.
+``` python
+try:
+	val = dic["a"]
+except KeyError:
+	print("This key doesn't exist!")
+else:
+	print("It is okay!")
+```
+The result is :
+
+##### Raise statement
+The [raise](https://docs.python.org/3/reference/simple_stmts.html#raise) statement allows the programmer to force a specified exception to occur. For example:
+``` python
+raise NameError('HiThere')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: HiThere
+```
+The sole argument to raise indicates the exception to be raised. This must be either an exception instance or an exception class (a class that derives from BaseException, such as Exception or one of its subclasses). If an exception class is passed, it will be implicitly instantiated by calling its constructor with no arguments:
+``` python
+raise ValueError  # shorthand for 'raise ValueError()'
+```
+If you need to determine whether an exception was raised but don’t intend to handle it, a simpler form of the raise statement allows you to re-raise the exception:
+``` python
+try:
+    raise NameError('HiThere')
+except NameError:
+    print('An exception flew by!')
+    raise
+
+An exception flew by!
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+NameError: HiThere
+```
+##### Finally
 
 
-Concept :
-- Python : 
- 
+#### Custom exceptions 
+When an exception is created in order to be raised, it is usually initialized with information that describes the error that has occurred. There are cases where it is useful to add information after the exception was caught. For this purpose, exceptions have a method add_note(note) that accepts a string and adds it to the exception’s notes list. The standard traceback rendering includes all notes, in the order they were added, after the exception.
+``` python
+try:
+    raise TypeError('bad type')
+except Exception as e:
+    e.add_note('Add some information')
+    e.add_note('Add some more information')
+    raise
 
-Théorie : 
-- Excepton in python : Syntaxe, handling(Raise, solution), type of exceptions, custom exceptions, 
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+TypeError: bad type
+Add some information
+Add some more information
+```
+For example, when collecting exceptions into an exception group, we may want to add context information for the individual errors. In the following each exception in the group has a note indicating when this error has occurred.
+``` python
+def f():
+    raise OSError('operation failed')
+excs = []
+for i in range(3):
+    try:
+        f()
+    except Exception as e:
+        e.add_note(f'Happened in Iteration {i+1}')
+        excs.append(e)
+
+raise ExceptionGroup('We have some problems', excs)
+  + Exception Group Traceback (most recent call last):
+  |   File "<stdin>", line 1, in <module>
+  | ExceptionGroup: We have some problems (3 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "<stdin>", line 3, in <module>
+    |   File "<stdin>", line 2, in f
+    | OSError: operation failed
+    | Happened in Iteration 1
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "<stdin>", line 3, in <module>
+    |   File "<stdin>", line 2, in f
+    | OSError: operation failed
+    | Happened in Iteration 2
+    +---------------- 3 ----------------
+    | Traceback (most recent call last):
+    |   File "<stdin>", line 3, in <module>
+    |   File "<stdin>", line 2, in f
+    | OSError: operation failed
+    | Happened in Iteration 3
+    +------------------------------------
+```
  
 Exemple pratique :
 
 Potentielles alternatives : 
  
 Cas d’utilisation concrets en rapport avec l’analyse de données :
-
-An exception is an event, which occurs during the execution of a program, that disrupts the normal flow of the program's instructions.
-
-Until now error messages haven’t been more than mentioned, but if you have tried out the examples you have probably seen some. There are (at least) two distinguishable kinds of errors: _syntax errors_ and _exceptions_
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Dillinger
-## _The Last Markdown Editor, Ever_
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
-Dillinger is a cloud-enabled, mobile-ready, offline-storage compatible,
-AngularJS-powered HTML5 Markdown editor.
-
-- Type some Markdown on the left
-- See HTML in the right
-- ✨Magic ✨
-
-## Features
-
-- Import a HTML file and watch it magically convert to Markdown
-- Drag and drop images (requires your Dropbox account be linked)
-- Import and save files from GitHub, Dropbox, Google Drive and One Drive
-- Drag and drop markdown and HTML files into Dillinger
-- Export documents as Markdown, HTML and PDF
-
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
-As [John Gruber] writes on the [Markdown site][df1]
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-This text you see here is *actually- written in Markdown! To get a feel
-for Markdown's syntax, type some text into the left window and
-watch the results in the right.
-
-## Tech
-
-Dillinger uses a number of open source projects to work properly:
-
-- [AngularJS] - HTML enhanced for web apps!
-- [Ace Editor] - awesome web-based text editor
-- [markdown-it] - Markdown parser done right. Fast and easy to extend.
-- [Twitter Bootstrap] - great UI boilerplate for modern web apps
-- [node.js] - evented I/O for the backend
-- [Express] - fast node.js network app framework [@tjholowaychuk]
-- [Gulp] - the streaming build system
-- [Breakdance](https://breakdance.github.io/breakdance/) - HTML
-to Markdown converter
-- [jQuery] - duh
-
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
-## Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-cd dillinger
-npm i
-node app
-```
-
-For production environments...
-
-```sh
-npm install --production
-NODE_ENV=production node app
-```
-
-## Plugins
-
-Dillinger is currently extended with the following plugins.
-Instructions on how to use them in your own application are linked below.
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
-
-## Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantaneously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-
-```sh
-node app
-```
-
-Second Tab:
-
-```sh
-gulp watch
-```
-
-(optional) Third:
-
-```sh
-karma test
-```
-
-#### Building for source
-
-For production release:
-
-```sh
-gulp build --prod
-```
-
-Generating pre-built zip archives for distribution:
-
-```sh
-gulp build dist --prod
-```
-
-## Docker
-
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 8080, so change this within the
-Dockerfile if necessary. When ready, simply use the Dockerfile to
-build the image.
-
-```sh
-cd dillinger
-docker build -t <youruser>/dillinger:${package.json.version} .
-```
-
-This will create the dillinger image and pull in the necessary dependencies.
-Be sure to swap out `${package.json.version}` with the actual
-version of Dillinger.
-
-Once done, run the Docker image and map the port to whatever you wish on
-your host. In this example, we simply map port 8000 of the host to
-port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 8000:8080 --restart=always --cap-add=SYS_ADMIN --name=dillinger <youruser>/dillinger:${package.json.version}
-```
-
-> Note: `--capt-add=SYS-ADMIN` is required for PDF rendering.
-
-Verify the deployment by navigating to your server address in
-your preferred browser.
-
-```sh
-127.0.0.1:8000
-```
-
-## License
-
-MIT
-
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
