@@ -6,6 +6,7 @@
 
 ![Python is third most used langage](./img/Market_Share.png)
 
+
 ### Errors and Exceptions
 Error and exception handling is something you should consider in all your programs. It is obvious for a developer to encounter some errors when writing code. However, there are mainly two types of errors, built-in and user-caused.
 Until now error messages haven’t been more than mentioned, but if you have tried out the examples you have probably seen some. There are (at least) two distinguishable kinds of errors: _syntax errors_ and _exceptions_
@@ -138,7 +139,11 @@ finally:
  print ("OVER AND OUT")
 ```
 While executing the above code, if we enter a non-numeric data as input, the finally block will be executed. So, the message “OVER AND OUT” will be displayed. Thereafter the exception for which handler is not present will be re-raised. The output of Program 1-7 is shown in Figure 1.13.
+
+
 ![Finally1](./img/Finally1.png)
+
+
 After execution of finally block, Python transfers the control to a previously entered try or to the next higher level default exception handler. In such a case, the statements following the finally block is executed. That is, unlike except, execution of the finally clause does not terminate the exception. Rather, the exception continues to be raised after execution of finally. To summarise, we put a piece of code where there are possibilities of errors or exceptions to occur inside a try block. Inside each except clause we define handler codes to handle the matching exception raised in the
 try block. The optional else clause contains codes to be executed if no exception occurs. The optional finally
 block contains codes to be executed irrespective of whether an exception occurs or not.
