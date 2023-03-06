@@ -14,6 +14,7 @@ Until now error messages haven’t been more than mentioned, but if you have tri
 
 ## 1. Syntax Errors
 Syntax errors, also known as parsing errors, are perhaps the most common kind of complaint you get while you are still learning Python:
+**Program 1**
 ``` python
 while True print('Hello Word')
 File "<stdin>", line 1
@@ -27,8 +28,15 @@ An exception is an event, **which occurs during the execution of a program, that
 In fact, Python's exception and error handling helps developers to deal with these exceptional situations by controlling the behavior of your code even in case of errors.
 Exceptions occur when exceptional situations arise in your program. For example, opening a file that doesn't exist, or stopping a running program and sometimes even a user will want to have fun by typing anything. Such situations are handled with the help of exceptions.
 Even if a statement or expression is syntactically correct, it may cause an error when an attempt is made to execute it. Errors detected during execution are called exceptions and are not unconditionally fatal: you will soon learn how to handle them in Python programs. Most exceptions are not handled by programs, however, and result in error messages as shown here:
+**Program 2**
 ``` python
 25 * 10/0
+PS D:\Python> & C:/Users/CYRILLE/AppData/Local/Programs/Python/Python311/python.exe d:/Python/Untitled-1.py
+Traceback (most recent call last):
+  File "d:\Python\Untitled-1.py", line 1, in <module>
+    25 *10/0
+    ~~~~~~^~
+ZeroDivisionError: division by zero
 ```
 
 #### Type of exceptions
@@ -53,6 +61,7 @@ There are many type of exceptions (*[see here](https://docs.python.org/3/library
 #### Syntax and Handling 
 ##### Try....except
 The most basic instruction in exception and error handling Python uses the **try** and **except** keywords to handle exceptions. Both keywords are followed by indented code blocks.
+**Program 3**
 ``` python
 # we tell Python to try to execute a code
 # but, in case of an exception, it will have to execute another code
@@ -62,6 +71,7 @@ except:
     # to execute on error in the try block
 ```
 The try/except statement has another option, which is the use of the **else**. The else statement will only work if no error is generated.
+**Program 4**
 ``` python
 dic = {"a":1, "b":2, "c":3}
 try:
@@ -72,15 +82,15 @@ else:
 	print("It is okay!")
 ```
 The result is :
-``` python
-It is okay!
-```
+> It is okay!
+
 
 ##### Raise statement
 The [raise](https://docs.python.org/3/reference/simple_stmts.html#raise) statement allows the programmer to force a specified exception to occur. The raise statement can be used to throw an exception. The syntax of raise statement is: 
     _raise exception-name[(optional argument)]_
 The argument is generally a string that is displayed when the exception is raised.
 For example:
+**Program 5**
 ``` python
 raise NameError('HiThere')
 Traceback (most recent call last):
@@ -88,10 +98,12 @@ Traceback (most recent call last):
 NameError: HiThere
 ```
 The sole argument to raise indicates the exception to be raised. This must be either an exception instance or an exception class (a class that derives from BaseException, such as Exception or one of its subclasses). If an exception class is passed, it will be implicitly instantiated by calling its constructor with no arguments:
+**Program 6**
 ``` python
 raise ValueError  # shorthand for 'raise ValueError()'
 ```
 If you need to determine whether an exception was raised but don’t intend to handle it, a simpler form of the raise statement allows you to re-raise the exception:
+**Program 7**
 ``` python
 try:
     raise NameError('HiThere')
@@ -105,7 +117,8 @@ Traceback (most recent call last):
 NameError: HiThere
 ```
 ##### Finally
-The try statement in Python can also have an optional *finally* clause. The statements inside the finally block are always executed regardless of whether an exception has occurred in the try block or not. It is a common practice to use finally clause while working with files to ensure that the file object is closed. If used, finally should always be placed at the end of try clause, after all except blocks and the else block.
+The try statement in Python can also have an optional **_finally_** clause. The statements inside the finally block are always executed regardless of whether an exception has occurred in the try block or not. It is a common practice to use finally clause while working with files to ensure that the file object is closed. If used, finally should always be placed at the end of try clause, after all except blocks and the else block.
+**Program 8**
 ``` python
 print ("Handling exception using try...except...else...finally")
 try:
@@ -124,7 +137,8 @@ finally:
 ```
 In the above program, the message “OVER AND OUT” will be displayed irrespective of whether an exception is raised or not.
 
-If an error has been detected in the try block and the exception has been thrown, the appropriate except block will be executed to handle the error. But if the exception is not handled by any of the except clauses, then it is re-raised after the execution of the finally block. For example, Program 1.4 contains only the except block for ZeroDivisionError. If any other type of error occurs for which there is no handler code (except clause) defined, then also the finally clause will be executed first. Consider the code given in Program 1-7 to understand these concepts.
+If an error has been detected in the try block and the exception has been thrown, the appropriate except block will be executed to handle the error. But if the exception is not handled by any of the except clauses, then it is re-raised after the execution of the finally block. In fact if the program contains only the except block for ZeroDivisionError so any other type of error occurs for which there is no handler code (except clause) defined, then also the finally clause will be executed first. Consider the code given in Program 9 to understand these concepts.
+**Program 9**
 ``` python
 print (" Practicing for try block")
 try:
@@ -139,20 +153,19 @@ else:
 finally:
  print ("OVER AND OUT")
 ```
-While executing the above code, if we enter a non-numeric data as input, the finally block will be executed. So, the message “OVER AND OUT” will be displayed. Thereafter the exception for which handler is not present will be re-raised. The output of Program 1-7 is shown in Figure 1.13.
+While executing the above code, if we enter a non-numeric data as input, the finally block will be executed. So, the message “OVER AND OUT” will be displayed. Thereafter the exception for which handler is not present will be re-raised. The output of Program 9 is shown in the next Figure.
 
 
 ![Finally1](D:/Python/upgraded-journey/img/Finally1.png)
 
 
-After execution of finally block, Python transfers the control to a previously entered try or to the next higher level default exception handler. In such a case, the statements following the finally block is executed. That is, unlike except, execution of the finally clause does not terminate the exception. Rather, the exception continues to be raised after execution of finally. To summarise, we put a piece of code where there are possibilities of errors or exceptions to occur inside a try block. Inside each except clause we define handler codes to handle the matching exception raised in the
-try block. The optional else clause contains codes to be executed if no exception occurs. The optional finally
-block contains codes to be executed irrespective of whether an exception occurs or not.
+After execution of finally block, Python transfers the control to a previously entered try or to the next higher level default exception handler. In such a case, the statements following the finally block is executed. That is, unlike except, execution of the finally clause does not terminate the exception. Rather, the exception continues to be raised after execution of finally. To summarise, we put a piece of code where there are possibilities of errors or exceptions to occur inside a try block. Inside each except clause we define handler codes to handle the matching exception raised in the try block. The optional else clause contains codes to be executed if no exception occurs. The optional finally block contains codes to be executed irrespective of whether an exception occurs or not.
 
 ##### Raising and Handling Multiple Unrelated Exceptions
 There are situations where it is necessary to report several exceptions that have occurred. This is often the case in concurrency frameworks, when several tasks may have failed in parallel, but there are also other use cases where it is desirable to continue execution and collect multiple errors rather than raise the first exception.
 
 The builtin ExceptionGroup wraps a list of exception instances so that they can be raised together. It is an exception itself, so it can be caught like any other exception.
+**Program 10**
 ``` python
 def f():
     excs = [OSError('error 1'), SystemError('error 2')]
@@ -175,6 +188,7 @@ except Exception as e:
 caught <class 'ExceptionGroup'>: e
 ```
 By using except* instead of except, we can selectively handle only the exceptions in the group that match a certain type. In the following example, which shows a nested exception group, each except* clause extracts from the group exceptions of a certain type while letting all other exceptions propagate to other clauses and eventually to be reraised.
+**Program 11**
 ``` python
 def f():
     raise ExceptionGroup("group1",
@@ -205,6 +219,7 @@ There were SystemErrors
 
 #### Custom exceptions 
 When an exception is created in order to be raised, it is usually initialized with information that describes the error that has occurred. There are cases where it is useful to add information after the exception was caught. For this purpose, exceptions have a method add_note(note) that accepts a string and adds it to the exception’s notes list. The standard traceback rendering includes all notes, in the order they were added, after the exception.
+**Program 12**
 ``` python
 try:
     raise TypeError('bad type')
@@ -220,6 +235,7 @@ Add some information
 Add some more information
 ```
 For example, when collecting exceptions into an exception group, we may want to add context information for the individual errors. In the following each exception in the group has a note indicating when this error has occurred.
+**Program 13**
 ``` python
 def f():
     raise OSError('operation failed')
@@ -274,7 +290,6 @@ terminate abruptly.
 > - The statements inside the finally block are always executed regardless of whether an exception occurred in the try block or not.
  
 
-## Pratices :
 
 ## Alternatives : 
  One alternative is using of **if** statement for handling errors
