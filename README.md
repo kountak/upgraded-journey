@@ -296,12 +296,12 @@ terminate abruptly.
 ## Cases related to data analysis :
 
 ## Related articles
-[ZeroDivisionError](https://docs.python.org/3/library/exceptions.html#ZeroDivisionError)
-[Finally clause](https://docs.python.org/3/reference/compound_stmts.html#finally)
-[Errors and exceptions management in Python Python-Mostly use cases courants](https://pythonforge.com/gestion-des-erreurs-et-des-exceptions-python/)
-[NameError](https://docs.python.org/3/library/exceptions.html#NameError)
-[TypeError](https://docs.python.org/3/library/exceptions.html#TypeError)
-[Python | Catching the ball game](https://www.geeksforgeeks.org/python-catching-and-creating-exceptions/?ref=rp)
+[ZeroDivisionError](https://docs.python.org/3/library/exceptions.html#ZeroDivisionError)   
+[Finally clause](https://docs.python.org/3/reference/compound_stmts.html#finally)  
+[Errors and exceptions management in Python Python-Mostly use cases courants](https://pythonforge.com/gestion-des-erreurs-et-des-exceptions-python/)  
+[NameError](https://docs.python.org/3/library/exceptions.html#NameError)  
+[TypeError](https://docs.python.org/3/library/exceptions.html#TypeError)  
+[Python | Catching the ball game](https://www.geeksforgeeks.org/python-catching-and-creating-exceptions/?ref=rp)  
 
 
 
