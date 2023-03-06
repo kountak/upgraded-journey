@@ -87,7 +87,7 @@ The result is :
 
 ##### Raise statement
 The [raise](https://docs.python.org/3/reference/simple_stmts.html#raise) statement allows the programmer to force a specified exception to occur. The raise statement can be used to throw an exception. The syntax of raise statement is:   
-    _raise exception-name[(optional argument)]_
+    _raise exception-name[(optional argument)]_  
 The argument is generally a string that is displayed when the exception is raised.
 For example:  
 **Program 5**
@@ -187,7 +187,7 @@ except Exception as e:
 
 caught <class 'ExceptionGroup'>: e
 ```
-By using except* instead of except, we can selectively handle only the exceptions in the group that match a certain type. In the following example, which shows a nested exception group, each except* clause extracts from the group exceptions of a certain type while letting all other exceptions propagate to other clauses and eventually to be reraised.  
+By using except* _instead of except_, we can selectively handle only the exceptions in the group that match a certain type. In the following example, which shows a nested exception group, each except* clause extracts from the group exceptions of a certain type while letting all other exceptions propagate to other clauses and eventually to be reraised.  
 **Program 11**  
 ``` python
 def f():
