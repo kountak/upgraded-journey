@@ -3,8 +3,9 @@
 
 
 ### Python
+Python is the most popular programming languages [(see classification here)](https://99firms.com/blog/most-popular-programming-languages/#gref). 
+As in any programming language, there are situations where certain errors occur that must be managed.
 
-![Python is third most used langage](./img/Market_Share.png)
 
 
 ### Errors and Exceptions
@@ -141,7 +142,7 @@ finally:
 While executing the above code, if we enter a non-numeric data as input, the finally block will be executed. So, the message “OVER AND OUT” will be displayed. Thereafter the exception for which handler is not present will be re-raised. The output of Program 1-7 is shown in Figure 1.13.
 
 
-![](D:/Python/upgraded-journey/img/Finally1.png)
+![Finally1](D:/Python/upgraded-journey/img/Finally1.png)
 
 
 After execution of finally block, Python transfers the control to a previously entered try or to the next higher level default exception handler. In such a case, the statements following the finally block is executed. That is, unlike except, execution of the finally clause does not terminate the exception. Rather, the exception continues to be raised after execution of finally. To summarise, we put a piece of code where there are possibilities of errors or exceptions to occur inside a try block. Inside each except clause we define handler codes to handle the matching exception raised in the
@@ -276,15 +277,16 @@ terminate abruptly.
 ## Pratices :
 
 ## Alternatives : 
- 
+ One alternative is using of **if** statement for handling errors
 ## Cases related to data analysis :
 
-
-ZeroDivisionError : <https://docs.python.org/3/library/exceptions.html#ZeroDivisionError>
-Finally clause : <https://docs.python.org/3/reference/compound_stmts.html#finally>
-Errors and exceptions management in Python Python-Mostly use cases courants : <https://pythonforge.com/gestion-des-erreurs-et-des-exceptions-python/>
-NameError : <https://docs.python.org/3/library/exceptions.html#NameError> 
-TypeError : <https://docs.python.org/3/library/exceptions.html#TypeError>
+## Related articles
+[ZeroDivisionError](https://docs.python.org/3/library/exceptions.html#ZeroDivisionError)
+[Finally clause](https://docs.python.org/3/reference/compound_stmts.html#finally)
+[Errors and exceptions management in Python Python-Mostly use cases courants](https://pythonforge.com/gestion-des-erreurs-et-des-exceptions-python/)
+[NameError](https://docs.python.org/3/library/exceptions.html#NameError)
+[TypeError](https://docs.python.org/3/library/exceptions.html#TypeError)
+[Python | Catching the ball game](https://www.geeksforgeeks.org/python-catching-and-creating-exceptions/?ref=rp)
 
 
 
