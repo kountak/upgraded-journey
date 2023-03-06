@@ -1,19 +1,16 @@
 ![Logo DIT](./img/Logo.png)
-#  EXCEPTIONS 
+#  EXCEPTIONS
 
 
-## Main Concepts
 ### Python
-#### Origin
-#### Market Shares
+
 ![Python is third most used langage](./img/Market_Share.png)
-#### Mostly use cases
 
 ### Errors and Exceptions
 Error and exception handling is something you should consider in all your programs. It is obvious for a developer to encounter some errors when writing code. However, there are mainly two types of errors, built-in and user-caused.
 Until now error messages haven’t been more than mentioned, but if you have tried out the examples you have probably seen some. There are (at least) two distinguishable kinds of errors: _syntax errors_ and _exceptions_
 
-#### Syntax Errors
+## 1. Syntax Errors
 Syntax errors, also known as parsing errors, are perhaps the most common kind of complaint you get while you are still learning Python:
 ``` python
 while True print('Hello Word')
@@ -23,7 +20,7 @@ File "<stdin>", line 1
 SyntaxError: invalid syntax
 ``` 
 The parser repeats the offending line and displays a little ‘arrow’ pointing at the earliest point in the line where the error was detected. The error is caused by (or at least detected at) the token preceding the arrow: in the example, the error is detected at the function print(), since a colon (':') is missing before it. File name and line number are printed so you know where to look in case the input came from a script.
-### Exceptions : 
+## 2. Exceptions : 
 An exception is an event, **which occurs during the execution of a program, that disrupts the normal flow of the program's instructions**.
 In fact, Python's exception and error handling helps developers to deal with these exceptional situations by controlling the behavior of your code even in case of errors.
 Exceptions occur when exceptional situations arise in your program. For example, opening a file that doesn't exist, or stopping a running program and sometimes even a user will want to have fun by typing anything. Such situations are handled with the help of exceptions.
@@ -33,10 +30,12 @@ Even if a statement or expression is syntactically correct, it may cause an erro
 ```
 
 #### Type of exceptions
-There are many type of exceptions (*[see here](https://docs.python.org/3/library/exceptions.html#bltin-exceptions)*). The most current are 
-- [*ZeroDivisionError*](https://docs.python.org/3/library/exceptions.html#ZeroDivisionError) : when you try to divide a number by zero
-- [*NameError*](https://docs.python.org/3/library/exceptions.html#NameError) : when a local or global name cannot be found
-- [*TypeError*](https://docs.python.org/3/library/exceptions.html#TypeError)
+There are many type of exceptions (*[see here](https://docs.python.org/3/library/exceptions.html#bltin-exceptions)*). The most current are:
+| Exceptions | When it occurs |
+| ------ | ------ |
+| ZeroDivisionError | you try to divide a number by zero |
+| [*NameError*](https://docs.python.org/3/library/exceptions.html#NameError) | a local or global name cannot be found |
+| [*TypeError*](https://docs.python.org/3/library/exceptions.html#TypeError) | [data type of an object in an operation is inappropriate |
 
 #### Syntax and Handling 
 ##### Try....except
@@ -51,6 +50,7 @@ except:
 ```
 The try/except statement has another option, which is the use of the **else**. The else statement will only work if no error is generated.
 ``` python
+dic = {"a":1, "b":2, "c":3}
 try:
 	val = dic["a"]
 except KeyError:
@@ -59,9 +59,15 @@ else:
 	print("It is okay!")
 ```
 The result is :
+``` python
+It is okay!
+```
 
 ##### Raise statement
-The [raise](https://docs.python.org/3/reference/simple_stmts.html#raise) statement allows the programmer to force a specified exception to occur. For example:
+The [raise](https://docs.python.org/3/reference/simple_stmts.html#raise) statement allows the programmer to force a specified exception to occur. The raise statement can be used to throw an exception. The syntax of raise statement is: 
+    _raise exception-name[(optional argument)]_
+The argument is generally a string that is displayed when the exception is raised.
+For example:
 ``` python
 raise NameError('HiThere')
 Traceback (most recent call last):
@@ -86,7 +92,99 @@ Traceback (most recent call last):
 NameError: HiThere
 ```
 ##### Finally
+The try statement in Python can also have an optional *finally* clause. The statements inside the finally block are always executed regardless of whether an exception has occurred in the try block or not. It is a common practice to use finally clause while working with files to ensure that the file object is closed. If used, finally should always be placed at the end of try clause, after all except blocks and the else block.
+``` python
+print ("Handling exception using try...except...else...finally")
+try:
+ numerator=50
+ denom=int(input("Enter the denominator: "))
+ quotient=(numerator/denom)
+ print ("Division performed successfully")
+except ZeroDivisionError:
+ print ("Denominator as ZERO is not allowed")
+except ValueError:
+ print ("Only INTEGERS should be entered")
+else:
+ print ("The result of division operation is ", quotient)
+finally:
+ print ("OVER AND OUT")
+```
+In the above program, the message “OVER AND OUT” will be displayed irrespective of whether an exception is raised or not.
 
+If an error has been detected in the try block and the exception has been thrown, the appropriate except block will be executed to handle the error. But if the exception is not handled by any of the except clauses, then it is re-raised after the execution of the finally block. For example, Program 1.4 contains only the except block for ZeroDivisionError. If any other type of error occurs for which there is no handler code (except clause) defined, then also the finally clause will be executed first. Consider the code given in Program 1-7 to understand these concepts.
+``` python
+print (" Practicing for try block")
+try:
+ numerator=50
+ denom=int(input("Enter the denominator"))
+ quotient=(numerator/denom)
+ print ("Division performed successfully")
+except ZeroDivisionError:
+ print ("Denominator as ZERO is not allowed")
+else:
+ print ("The result of division operation is ", quotient)
+finally:
+ print ("OVER AND OUT")
+```
+While executing the above code, if we enter a non-numeric data as input, the finally block will be executed. So, the message “OVER AND OUT” will be displayed. Thereafter the exception for which handler is not present will be re-raised. The output of Program 1-7 is shown in Figure 1.13.
+
+After execution of finally block, Python transfers the control to a previously entered try or to the next higher level default exception handler. In such a case, the statements following the finally block is executed. That is, unlike except, execution of the finally clause does not terminate the exception. Rather, the exception continues to be raised after execution of finally. To summarise, we put a piece of code where there are possibilities of errors or exceptions to occur inside a try block. Inside each except clause we define handler codes to handle the matching exception raised in the
+try block. The optional else clause contains codes to be executed if no exception occurs. The optional finally
+block contains codes to be executed irrespective of whether an exception occurs or not.
+
+##### Raising and Handling Multiple Unrelated Exceptions
+There are situations where it is necessary to report several exceptions that have occurred. This is often the case in concurrency frameworks, when several tasks may have failed in parallel, but there are also other use cases where it is desirable to continue execution and collect multiple errors rather than raise the first exception.
+
+The builtin ExceptionGroup wraps a list of exception instances so that they can be raised together. It is an exception itself, so it can be caught like any other exception.
+``` python
+def f():
+    excs = [OSError('error 1'), SystemError('error 2')]
+    raise ExceptionGroup('there were problems', excs)
+f()
+  + Exception Group Traceback (most recent call last):
+  |   File "<stdin>", line 1, in <module>
+  |   File "<stdin>", line 3, in f
+  | ExceptionGroup: there were problems
+  +-+---------------- 1 ----------------
+    | OSError: error 1
+    +---------------- 2 ----------------
+    | SystemError: error 2
+    +------------------------------------
+try:
+    f()
+except Exception as e:
+    print(f'caught {type(e)}: e')
+
+caught <class 'ExceptionGroup'>: e
+```
+By using except* instead of except, we can selectively handle only the exceptions in the group that match a certain type. In the following example, which shows a nested exception group, each except* clause extracts from the group exceptions of a certain type while letting all other exceptions propagate to other clauses and eventually to be reraised.
+``` python
+def f():
+    raise ExceptionGroup("group1",
+                         [OSError(1),
+                          SystemError(2),
+                          ExceptionGroup("group2",
+                                         [OSError(3), RecursionError(4)])])
+
+try:
+    f()
+except* OSError as e:
+    print("There were OSErrors")
+except* SystemError as e:
+    print("There were SystemErrors")
+
+There were OSErrors
+There were SystemErrors
+  + Exception Group Traceback (most recent call last):
+  |   File "<stdin>", line 2, in <module>
+  |   File "<stdin>", line 2, in f
+  | ExceptionGroup: group1
+  +-+---------------- 1 ----------------
+    | ExceptionGroup: group2
+    +-+---------------- 1 ----------------
+      | RecursionError: 4
+      +------------------------------------
+```
 
 #### Custom exceptions 
 When an exception is created in order to be raised, it is usually initialized with information that describes the error that has occurred. There are cases where it is useful to add information after the exception was caught. For this purpose, exceptions have a method add_note(note) that accepts a string and adds it to the exception’s notes list. The standard traceback rendering includes all notes, in the order they were added, after the exception.
@@ -140,9 +238,39 @@ raise ExceptionGroup('We have some problems', excs)
     | Happened in Iteration 3
     +------------------------------------
 ```
+> ## Summary
+> - Syntax errors or parsing errors are detected when we have not followed the rules of the particular programming language while writing a program.
+> - When syntax error is encountered, Python displays the name of the error and a small description about the error.
+> - The execution of the program will start only after the syntax error is rectified.
+> - An exception is a Python object that represents an error.
+> - Syntax errors are also handled as exceptions.
+> - The exception needs to be handled by the programmer so that the program does not
+terminate abruptly.
+> - When an exception occurs during execution of a program and there is a built-in exception defined for that, the error message written in that exception is displayed. The programmer then has to take appropriate action and handle it. 
+> - Some of the commonly occurring built-in exceptions are **_SyntaxError, ValueError, IOError, KeyboardInterrupt, ImportError, EOFError, ZeroDivisionError, IndexError, NameError, IndentationError, TypeError,and OverFlowerror_**.
+> - When an error is encountered in a program, Python interpreter raises or throws an exception.
+> - Exception Handlers are the codes that are designed to execute when a specific exception is raised.
+> - Raising an exception involves interrupting the normal flow of the program execution and jumping to the exception handler.
+> - Raise and assert statements are used to raise exceptions. The process of exception handling involves writing additional code to give proper messages or instructions to the user. This prevents the program from crashing abruptly. The additional code is known as an exception handler.
+> - An exception is said to be caught when a code that is designed to handle a particular exception is executed.
+> - An exception is caught in the try block and handles in except block.
+> - The statements inside the finally block are always executed regardless of whether an exception occurred in the try block or not.
  
-Exemple pratique :
 
-Potentielles alternatives : 
+## Pratices :
+
+## Alternatives : 
  
-Cas d’utilisation concrets en rapport avec l’analyse de données :
+## Cases related to data analysis :
+
+
+ZeroDivisionError : <https://docs.python.org/3/library/exceptions.html#ZeroDivisionError>
+Finally clause : <https://docs.python.org/3/reference/compound_stmts.html#finally>
+Errors and exceptions management in Python Python-Mostly use cases courants : <https://pythonforge.com/gestion-des-erreurs-et-des-exceptions-python/>
+
+
+
+
+
+
+
