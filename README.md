@@ -31,11 +31,22 @@ Even if a statement or expression is syntactically correct, it may cause an erro
 
 #### Type of exceptions
 There are many type of exceptions (*[see here](https://docs.python.org/3/library/exceptions.html#bltin-exceptions)*). The most current are:
-| Exceptions | When it occurs |
-| ------ | ------ |
-| ZeroDivisionError | you try to divide a number by zero |
-| [*NameError*](https://docs.python.org/3/library/exceptions.html#NameError) | a local or global name cannot be found |
-| [*TypeError*](https://docs.python.org/3/library/exceptions.html#TypeError) | [data type of an object in an operation is inappropriate |
+
+**Table 1.1  Built-in exceptions in Python**
+|N°| Exceptions | Explanation |
+|-| --- | ------ |
+|1.|SyntaxError |It is raised when there is an error in the syntax of the Python code.|
+|2.|ValueError|It is raised when a built-in method or operation receives an argument that has the right data type but mismatched or inappropriate values.|
+|3.|IOError|It is raised when the file specified in a program statement cannot be opened.|
+|4.|KeyboardInterrupt|It is raised when the user accidentally hits the Delete or Esc key while executing a program due to which the normal flow of the program is interrupted.|
+|5.|ImportError|It is raised when the requested module definition is not found.|
+|6.|EOFError |It is raised when the end of file condition is reached without reading any data by input().|
+|7.| ZeroDivisionError | It is raised when the denominator in a division operation is zero. |
+|8.| IndexError | It is raised when the index or subscript in a sequence is out of range. |
+|9.| NameError | It is raised when a local or global variable name is not defined. |
+|10.|IndentationError|It is raised due to incorrect indentation in the program code.|
+|11.|TypeError|It is raised when an operator is supplied with a value of incorrect data type.|
+|12.|OverFlowError|It is raised when the result of a calculation exceeds the maximum limit for numeric data type.|
 
 #### Syntax and Handling 
 ##### Try....except
@@ -267,6 +278,8 @@ terminate abruptly.
 ZeroDivisionError : <https://docs.python.org/3/library/exceptions.html#ZeroDivisionError>
 Finally clause : <https://docs.python.org/3/reference/compound_stmts.html#finally>
 Errors and exceptions management in Python Python-Mostly use cases courants : <https://pythonforge.com/gestion-des-erreurs-et-des-exceptions-python/>
+NameError : <https://docs.python.org/3/library/exceptions.html#NameError> 
+TypeError : <https://docs.python.org/3/library/exceptions.html#TypeError>
 
 
 
